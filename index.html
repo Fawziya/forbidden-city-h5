@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>紫禁城·故宫 - 热门景点导览</title>
+    <!-- Tailwind CSS -->
+    <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-100-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- 中文字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
+    <style>
+        /* 文化复古风格定制样式 */
+        body {
+            font-family: 'Noto Serif SC', serif;
+            background-color: #f8f3e6; /* 米黄色背景 */
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c4zDNFAAAFtklEQVR4Ae3ThZrjOhJF4ZOkimVmGN7/Ne82Y8/0/sw0O7HsnuPvS53q6ODgffzr0bA6hjurVSh4camM4MnlYk5BTjaiE/wYmhNr/LiqlM8nxRZfLnrVG3ozsmW9oZySeRMbIoqUukAQy+tGcnHCn5cUV+q9FxzjB5dCgKec4OcTg+FZgoUSf5Fko5B0MnJIPg7ixdmn0/mIB2dU1SizxyM1voXBPCEHSgEoJ0BS8B2Fcj+NASAVoZWB3meiGE4HQGMobUZwpwEwCTnvA9PJcKsgIJ2Rfcr7BXeaEaDry+g9c9+93lOGRRHYoQ6G87Pefbd6MCwKB3Q55WSo+t3L0nlfFPdYD97hVm5vr3gsUU5RUMqUl9X77ttty8uCMAvLmVItl/XtdjuXd8+FQiRLm31+eb/drtfrpVzPOEymwFh8u384iCDeTueypD/CYmRxuIuBUXojmZJ6YmIWvoRDHqUJNo5QgkU5QYlsEJUfBV0SQidEd1eFn0YVBEETMgfBqtwlDEI6SQghNEJiEHJARAgxiCCpsgoJ5wkRQrgIoREyV0F0Qm5CQghNkBhFCSJ1QrJQRAhNkFsUGIT8KOyESBCRILGQIAMSUwOxkGAgCFUAkQIxNRAaiCUIRRB2QRiE9ESaTsi9IDxBWIOoDeJ/e3V5JZnIXofs1QlxzeS1qtsVDd2ovZIkCaH6WrJQe03drmXQBHMtGfoNkn8tMVxLTF1L7rXkKKJrS5mVQb6U4OgSSghKWBLv80PbIDGHwAYxu5JMQnDyGCGO7BAp0wjZ4UhIyj6IFIJYERmsENcJ+VHYBRmFdFbIEMQ1I8QjJH82JPsgbBC5FlKDsCuCDUKUSKdDEhbEKZFt5HCMPsgkpObsLgitVyLxWrS6ljAICTWIbSH+WiJ0LclXkvFa0l5J3LWk3yDLtcRdS8ZriXsgXUv2n+1a0l5JsrVkuZJ4DXItSdcSey1xDyRryXQtWa8lrMaA1HsNQhhY6BC5QlKFmEE8a5BxQnIQEf2ESIYMQQjVCmENwhqE0CDDCnFTkFQhsUO6IDJMCD8gNQhlsBDTThAfJPaId0G8AmEQsUGsQlgQl0GMCeI6xLdB3IBQBaE8IFMQCiCTBokFQmtAaoP4ARmDUAahVQYkB7ENYifE9Yj4IKxCTBBpEJMqJGqQ0iNWgowKhA2QCkgN0im5Fyv1sSCxQ2IQUyI7/hA2QDZPxAWRBpEG8RXigzAhTAjLgNgGcQ2SOyQUCCvEVoivkBJEekSsQXyFzEFGJSMIs4OYKdGU7oQkDUIUQDJ3SD9BcofkDhk1QCZlghgJkEkBUgskd0iWATF6hMweCBtk0jJDfIfMcsDsgeQO8RNidUCCDgiVKUgsEFshpQMkDsjUIbFAJq0LJA1I7JDJ6IDMUhaI1wGhQ0KBuAjJBTJ1SJogVjskJohvEGod4jUpA+IyJEiHxAKZJkickFmD7JpA5OyQ0CBxJyTJgDgGCBsk6xCfCiQ0iMwQnyFhQtghoUNchcwdEjvENMjYIbFC9EBigsQJCR0yVUiokB1fg4QCcR2SA2RogOQ8IFMDpAZxDeImJDTI1CFsEG6Q0CFsEK8DEhtEOiR1CAtknBDfIDJDbAVkFyFJJiR0iFRIapBQIVOD7AokV8ikDZCgHTIfYvdAwoD4CgkFkgckzFdymSGxQXyFhAyJFRIbZKyQ3CBhQEYv2iBBC2TXAE5hQDJEoUByYn5McE4r6sUyIHRMwINssMGc7OYZApejBIUbT6Kb62NWMxh83NkIwVtY6fDgGCuDUPAaAuHBoXOJ8HJM5YQ7WdaLOOBFpvmMg2w1JeKDYI0zXgxZI3LGg5wDUZFOCDeSO2WOYJRk0Zw7YgKLRcqJZSaklQwVAkUpkiWxFl/iDqmy06I4i8mDNWuk9EVL9sIWSwiqPZ68i2o5IyTnezzYrLS3I/L7QJao0OPDxnMhHPDlQzrnkIgPl43juxCOCXhzCB9y8P/jP6Q/Ae5IpGvt0sUAAAAASUVORK5CYII=');
+            color: #4a3520; /* 深棕色文字 */
+        }
+
+        /* 标题样式 */
+        h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-weight: 700;
+            color: #8C3130; /* 传统中国红 */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.1em;
+        }
+
+        /* 景点卡片样式 */
+        .sight-card {
+            background-color: rgba(255, 251, 240, 0.9);
+            border: 1px solid #e0d4b8;
+            box-shadow: 0 4px 6px rgba(124, 89, 55, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .sight-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(to right, #8C3130, #C7A17A, #8C3130);
+        }
+
+        /* 装饰分隔线 */
+        .decorative-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #C7A17A, transparent);
+            margin: 1rem 0;
+        }
+
+        /* 自定义音频播放按钮 */
+        .audio-button {
+            background: #8C3130;
+            color: #f8f3e6;
+            transition: all 0.3s ease;
+            border: 1px solid #6b2320;
+        }
+        
+        .audio-button:hover {
+            background: #6b2320;
+        }
+        
+        .audio-button:active {
+            transform: scale(0.95);
+        }
+
+        .audio-playing {
+            background: #4a3520;
+            animation: pulse 2s infinite;
+        }
+
+        /* 卷轴效果 */
+        .scroll-decoration {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/svg" width="100" height="20" viewBox="0 0 100 20"><path d="M0,10 Q25,20 50,10 T100,10" fill="none" stroke="%23C7A17A" stroke-width="1"/></svg>');
+            background-repeat: repeat-x;
+            height: 10px;
+            opacity: 0.6;
+        }
+
+        /* 水墨风格角标 */
+        .ink-corner {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            opacity: 0.25;
+        }
+
+        .ink-corner.top-right {
+            top: 0;
+            right: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/svg" viewBox="0 0 50 50"><path d="M50,0 C40,10 30,30 0,50" fill="none" stroke="%23000" stroke-width="3" stroke-linecap="round"/></svg>');
+        }
+
+        .ink-corner.bottom-left {
+            bottom: 0;
+            left: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/svg" viewBox="0 0 50 50"><path d="M0,50 C10,40 30,30 50,0" fill="none" stroke="%23000" stroke-width="3" stroke-linecap="round"/></svg>');
+        }
+
+        /* 渐变动画 */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* 无障碍增强 */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        .focus-visible:focus {
+            outline: 3px solid #4a90e2;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-8">
+    <!-- 顶部装饰 -->
+    <div class="scroll-decoration mt-2"></div>
+    
+    <!-- 页面标题 -->
+    <header class="text-center pt-6 pb-4">
+        <h1 class="text-3xl md:text-4xl mb-1">紫禁城·故宫</h1>
+        <p class="text-sm italic text-gray-700">「天子居之，紫微垣中央，乃天之所居也」</p>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-4 max-w-md" x-data="{ 
+        activeSpot: null,
+        audioPlaying: null,
+        audioElements: {},
+        
+        toggleSpot(spotId) {
+            this.activeSpot = this.activeSpot === spotId ? null : spotId;
+        },
+        
+        playAudio(spotId, audioUrl) {
+            // 如果已有音频在播放，停止它
+            if (this.audioPlaying && this.audioPlaying !== spotId) {
+                this.audioElements[this.audioPlaying].pause();
+                this.audioElements[this.audioPlaying].currentTime = 0;
+            }
+            
+            // 获取或创建音频元素
+            if (!this.audioElements[spotId]) {
+                this.audioElements[spotId] = new Audio(audioUrl);
+                this.audioElements[spotId].addEventListener('ended', () => {
+                    this.audioPlaying = null;
+                });
+            }
+            
+            // 播放或暂停音频
+            if (this.audioPlaying === spotId) {
+                this.audioElements[spotId].pause();
+                this.audioPlaying = null;
+            } else {
+                this.audioElements[spotId].play();
+                this.audioPlaying = spotId;
+            }
+        },
+        
+        getAudioButtonText(spotId) {
+            return this.audioPlaying === spotId ? '暂停语音' : '收听语音';
+        },
+        
+        getAudioButtonIcon(spotId) {
+            return this.audioPlaying === spotId ? 'fa-pause' : 'fa-play';
+        }
+    }">
+        <!-- 故宫简介 -->
+        <div class="sight-card rounded-lg p-6 mb-6 relative">
+            <div class="ink-corner top-right" aria-hidden="true"></div>
+            <h2 class="text-xl font-bold mb-3 text-center">故宫博物院</h2>
+            <p class="text-base leading-relaxed">
+                故宫又名紫禁城，是明、清两代的皇宫，也是古老中国的标志和世界上保存最完好、规模最大的木质结构古建筑之一。
+                它位于北京中轴线的中心，是中国古代宫廷建筑的精华。下面为您介绍五处必游景点，感受帝王宫殿的雄伟与精致。
+            </p>
+            <div class="ink-corner bottom-left" aria-hidden="true"></div>
+        </div>
+        
+        <!-- 景点列表 -->
+        <div class="space-y-4">
+            <!-- 太和殿 -->
+            <div class="sight-card rounded-lg overflow-hidden">
+                <button 
+                    @click="toggleSpot('taihe')" 
+                    class="w-full text-left p-4 focus-visible"
+                    :aria-expanded="activeSpot === 'taihe'"
+                    aria-controls="taihe-details">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold">太和殿</h2>
+                        <span class="text-sm" x-text="activeSpot === 'taihe' ? '收起 ▲' : '展开 ▼'"></span>
+                    </div>
+                </button>
+                
+                <div 
+                    id="taihe-details"
+                    x-show="activeSpot === 'taihe'" 
+                    x-transition:enter="transition ease-out duration-200" 
+                    x-transition:enter-start="opacity-0 transform -translate-y-4" 
+                    x-transition:enter-end="opacity-100 transform translate-y-0"
+                    x-cloak>
+                    <div class="decorative-divider"></div>
+                    <div class="p-4 pt-0">
+                        <button 
+                            @click="playAudio('taihe', 'https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Ftts-mp3-20250507144052-yGitsfLU.mp3?Expires=86401746600052&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=JF1Yt5Vw66LuiLfSedf9P3CPARs%3D')" 
+                            class="audio-button rounded-full w-10 h-10 flex items-center justify-center mb-4 focus-visible"
+                            :class="{'audio-playing': audioPlaying === 'taihe'}"
+                            aria-label="播放或暂停太和殿语音介绍">
+                            <i class="fas" :class="getAudioButtonIcon('taihe')"></i>
+                            <span class="visually-hidden" x-text="getAudioButtonText('taihe')"></span>
+                        </button>
+                        
+                        <p class="text-base leading-relaxed">
+                            太和殿，故宫中最高大的建筑，明清两代国家举行大典的地方。殿高35米，面阔11间，进深5间，建筑面积约2377平方米，是整个紫禁城的中心。在《延禧攻略》中，太和殿是举行乾隆皇帝登基大典的地方，那一幕庄严肃穆，金碧辉煌的太和殿内，乾隆身着黄袍，在文武百官的跪拜中登上龙椅，成为天下共主。而在《如懿传》中，太和殿又是如懿被封为皇后的重要场景，那里的龙椅象征着至高无上的权力，周围的金龙盘旋，每一根柱子都描绘着宫廷故事。站在太和殿，你仿佛能听到《甄嬛传》中华妃说过的"九重龙椅，十二重城阙，我偏要这天下，舍我其谁"的野心宣言。漫步在这古老的殿堂，你会感受到电视剧中那些权力争斗和宫廷阴谋背后的历史厚重。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 保和殿 -->
+            <div class="sight-card rounded-lg overflow-hidden">
+                <button 
+                    @click="toggleSpot('baohe')" 
+                    class="w-full text-left p-4 focus-visible"
+                    :aria-expanded="activeSpot === 'baohe'"
+                    aria-controls="baohe-details">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold">保和殿</h2>
+                        <span class="text-sm" x-text="activeSpot === 'baohe' ? '收起 ▲' : '展开 ▼'"></span>
+                    </div>
+                </button>
+                
+                <div 
+                    id="baohe-details"
+                    x-show="activeSpot === 'baohe'" 
+                    x-transition:enter="transition ease-out duration-200" 
+                    x-transition:enter-start="opacity-0 transform -translate-y-4" 
+                    x-transition:enter-end="opacity-100 transform translate-y-0"
+                    x-cloak>
+                    <div class="decorative-divider"></div>
+                    <div class="p-4 pt-0">
+                        <button 
+                            @click="playAudio('baohe', 'https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Ftts-mp3-20250507144130-heJZEOQz.mp3?Expires=86401746600090&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=USb1GIqqwDid8YN%2FyrPJESw9FD0%3D')" 
+                            class="audio-button rounded-full w-10 h-10 flex items-center justify-center mb-4 focus-visible"
+                            :class="{'audio-playing': audioPlaying === 'baohe'}"
+                            aria-label="播放或暂停保和殿语音介绍">
+                            <i class="fas" :class="getAudioButtonIcon('baohe')"></i>
+                            <span class="visually-hidden" x-text="getAudioButtonText('baohe')"></span>
+                        </button>
+                        
+                        <p class="text-base leading-relaxed">
+                            保和殿位于太和殿北侧，是外朝三大殿中居中的建筑，也是皇帝举行宫廷宴会和接见外国使臣的场所。在《延禧攻略》中，保和殿是魏璎珞（后来的令妃）第一次参加宫廷选秀时的场景，那时她尚未了解宫廷的残酷，满怀对未来的憧憬。在《甄嬛传》中，这里是皇帝为皇后举办的生辰宴会的地点，甄嬛在此处首次展示了自己的才华与智慧，引起了皇帝的注意。保和殿的建筑风格典雅庄重，四周朱红色的廊柱与金色瓦顶相映成辉，而殿内陈设的御用家具与精美的珐琅器物，更是彰显了皇家的奢华与品味。在《大宋宫词》中，宋仁宗也曾在类似的殿堂内召见文武百官，议论国家大事，那些金瓯无缺的历史时刻，都在这样的殿堂中见证。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 中和殿 -->
+            <div class="sight-card rounded-lg overflow-hidden">
+                <button 
+                    @click="toggleSpot('zhonghe')" 
+                    class="w-full text-left p-4 focus-visible"
+                    :aria-expanded="activeSpot === 'zhonghe'"
+                    aria-controls="zhonghe-details">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold">中和殿</h2>
+                        <span class="text-sm" x-text="activeSpot === 'zhonghe' ? '收起 ▲' : '展开 ▼'"></span>
+                    </div>
+                </button>
+                
+                <div 
+                    id="zhonghe-details"
+                    x-show="activeSpot === 'zhonghe'" 
+                    x-transition:enter="transition ease-out duration-200" 
+                    x-transition:enter-start="opacity-0 transform -translate-y-4" 
+                    x-transition:enter-end="opacity-100 transform translate-y-0"
+                    x-cloak>
+                    <div class="decorative-divider"></div>
+                    <div class="p-4 pt-0">
+                        <button 
+                            @click="playAudio('zhonghe', 'https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Ftts-mp3-20250507144210-DvXgOzTO.mp3?Expires=86401746600130&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=YYw1tXdE5kFneAJoHXtimhK2DqI%3D')" 
+                            class="audio-button rounded-full w-10 h-10 flex items-center justify-center mb-4 focus-visible"
+                            :class="{'audio-playing': audioPlaying === 'zhonghe'}"
+                            aria-label="播放或暂停中和殿语音介绍">
+                            <i class="fas" :class="getAudioButtonIcon('zhonghe')"></i>
+                            <span class="visually-hidden" x-text="getAudioButtonText('zhonghe')"></span>
+                        </button>
+                        
+                        <p class="text-base leading-relaxed">
+                            中和殿位于太和殿与保和殿之间，是皇帝举行大典前休息、准备的地方。这座外方内圆的建筑象征着"天圆地方"的古代宇宙观。在《大明王朝1566》中，嘉靖皇帝曾在此更衣、稍作休息，然后前往太和殿主持大朝会。在《如懿传》中，乾隆皇帝在此处与大臣密谋如何应对边境危机，殿内垂挂的宫灯在昏暗中映照着他们凝重的面孔。中和殿内陈设简约却不失皇家威严，正中悬挂"允执厥中"匾额，提醒帝王应当坚守中庸之道。在《步步惊心》中，四爷（后来的雍正皇帝）曾在此处与十三爷深夜长谈，探讨理想的国家治理之道，那一幕在烛光摇曳下显得格外深沉而富有哲理。走进中和殿，你会感受到历史的厚重与权力更迭时刻的宁静前奏。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 乾清宫 -->
+            <div class="sight-card rounded-lg overflow-hidden">
+                <button 
+                    @click="toggleSpot('qianqing')" 
+                    class="w-full text-left p-4 focus-visible"
+                    :aria-expanded="activeSpot === 'qianqing'"
+                    aria-controls="qianqing-details">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold">乾清宫</h2>
+                        <span class="text-sm" x-text="activeSpot === 'qianqing' ? '收起 ▲' : '展开 ▼'"></span>
+                    </div>
+                </button>
+                
+                <div 
+                    id="qianqing-details"
+                    x-show="activeSpot === 'qianqing'" 
+                    x-transition:enter="transition ease-out duration-200" 
+                    x-transition:enter-start="opacity-0 transform -translate-y-4" 
+                    x-transition:enter-end="opacity-100 transform translate-y-0"
+                    x-cloak>
+                    <div class="decorative-divider"></div>
+                    <div class="p-4 pt-0">
+                        <button 
+                            @click="playAudio('qianqing', 'https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Ftts-mp3-20250507144246-KJKjbJub.mp3?Expires=86401746600166&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=riE7UoaO2CvXVRt553hwRGiW3Xc%3D')" 
+                            class="audio-button rounded-full w-10 h-10 flex items-center justify-center mb-4 focus-visible"
+                            :class="{'audio-playing': audioPlaying === 'qianqing'}"
+                            aria-label="播放或暂停乾清宫语音介绍">
+                            <i class="fas" :class="getAudioButtonIcon('qianqing')"></i>
+                            <span class="visually-hidden" x-text="getAudioButtonText('qianqing')"></span>
+                        </button>
+                        
+                        <p class="text-base leading-relaxed">
+                            乾清宫是内廷的主要宫殿，是皇帝日常居住和处理政务的地方。在《甄嬛传》中，乾清宫是皇帝召见后妃、批阅奏折的核心场所，无数次甄嬛被传唤至此，或是为皇帝解忧，或是承受打压。宫内正中放置龙床，两侧是皇帝批阅奏章的御案和取暖的暖阁。《如懿传》中，乾隆常在此处召见大臣议事，而后妃们则需要谨遵宫规，非传不得入内。在《延禧攻略》中，魏璎珞曾在乾清宫外守候多时，只为一睹皇帝圣颜，传达自己的冤屈。乾清宫前的丹陛桥是《宫锁心玉》中若曦初入宫时迷路的地方，也是后来八爷与十三爷密谋时的秘密会面之处。站在乾清宫，你仿佛能看到那些夜深人静时皇帝孤独批阅奏折的身影，以及无数次后妃们在此处的悲喜交加。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 故宫钟表馆 -->
+            <div class="sight-card rounded-lg overflow-hidden">
+                <button 
+                    @click="toggleSpot('clock')" 
+                    class="w-full text-left p-4 focus-visible"
+                    :aria-expanded="activeSpot === 'clock'"
+                    aria-controls="clock-details">
+                    <div class="flex justify-between items-center">
+                        <h2 class="text-xl font-bold">故宫钟表馆</h2>
+                        <span class="text-sm" x-text="activeSpot === 'clock' ? '收起 ▲' : '展开 ▼'"></span>
+                    </div>
+                </button>
+                
+                <div 
+                    id="clock-details"
+                    x-show="activeSpot === 'clock'" 
+                    x-transition:enter="transition ease-out duration-200" 
+                    x-transition:enter-start="opacity-0 transform -translate-y-4" 
+                    x-transition:enter-end="opacity-100 transform translate-y-0"
+                    x-cloak>
+                    <div class="decorative-divider"></div>
+                    <div class="p-4 pt-0">
+                        <button 
+                            @click="playAudio('clock', 'https://minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com/audio%2Ftts-mp3-20250507144453-RiUjiFRF.mp3?Expires=86401746600293&OSSAccessKeyId=LTAI5tGLnRTkBjLuYPjNcKQ8&Signature=G8dqmWRkyLtwix9NClx97H7rAzg%3D')" 
+                            class="audio-button rounded-full w-10 h-10 flex items-center justify-center mb-4 focus-visible"
+                            :class="{'audio-playing': audioPlaying === 'clock'}"
+                            aria-label="播放或暂停故宫钟表馆语音介绍">
+                            <i class="fas" :class="getAudioButtonIcon('clock')"></i>
+                            <span class="visually-hidden" x-text="getAudioButtonText('clock')"></span>
+                        </button>
+                        
+                        <p class="text-base leading-relaxed">
+                            故宫钟表馆位于东六宫的丰盈宫和承乾宫内，收藏着大量清代精美的中西方钟表。在《甄嬛传》中，华妃曾得到皇帝赏赐的一座西洋自鸣钟，引得众妃子羡慕不已。在《如懿传》中，乾隆皇帝对西洋钟表的痴迷被细腻描绘，他常常花数小时观赏这些精巧的机械装置，并以此作为赏赐宠妃的珍贵礼物。馆内最著名的"孔雀开屏钟"，在《延禧攻略》中成为了富察皇后向乾隆表达心意的礼物，每当整点报时，机械孔雀会自动开屏，金光闪烁，配以动听的音乐，象征着吉祥如意。在《还珠格格》中，小燕子初入宫闯入钟表收藏室，对这些精巧的发明惊叹不已，也引发了一系列啼笑皆非的闹剧。这些钟表不仅是清代皇室奢华生活的见证，更是中西文化交流的重要实物证据，展示了当时皇室对西方科技的好奇与接纳。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- 底部装饰 -->
+    <div class="scroll-decoration mt-8"></div>
+    
+    <!-- 页脚信息 -->
+    <footer class="text-center mt-6 text-sm text-gray-600">
+        <p>© 2025 紫禁城导览</p>
+        <p class="mt-1">内容来源：故宫博物院</p>
+    </footer>
+
+    <script>
+        // 添加键盘导航支持
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // 关闭当前打开的景点详情
+                const alpine = document.querySelector('[x-data]').__x;
+                if (alpine && alpine.$data.activeSpot) {
+                    alpine.$data.activeSpot = null;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
